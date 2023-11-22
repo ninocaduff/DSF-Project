@@ -1,0 +1,31 @@
+Data
+
+Data on Airquality: https://data.stadt-zuerich.ch/dataset/ugz_luftschadstoffmessung_tageswerte
+
+Function to import and edit airquality dataframe
+
+def AQ(year):
+    file_path = f'airquality/ugz_ogd_air_d1_{year}.csv'
+    data = pd.read_csv(file_path)
+    globals()[f'data{year}'] = data
+    rg_data = data[data['Standort'] == 'Zch_Rosengartenstrasse']        -> maybe add other streets here??
+    globals()[f'rg{year}_data'] = rg_data
+    rg_wide = rg_data.pivot(index='Datum', columns='Parameter', values='Wert')
+    globals()[f'rg{year}_wide'] = rg_wide
+
+Data on Traffic: https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031
+
+Function to import and edit traffic dataframe
+
+def TR(year):
+    file_path = f'traffic/sid_dav_verkehrszaehlung_miv_od2031_{year}.csv'     
+    traffic = pd.read_csv(file_path)
+    traffic_small = traffic.drop(columns=['MSID', 'MSName', 'Hoehe', 'EKoord', 'NKoord', 'AnzDetektoren', 'D1ID', 'D2ID', 'D3ID','D4ID', 'Knummer', 'ZSID'])
+    traffic_rg = traffic_small[traffic['ZSName'] == 'Rosengartenstrasse (Nordstrasse)'] --> maybe add other streets here??
+    traffic_rg['MessungDatZeit'] = pd.to_datetime(traffic_rg['MessungDatZeit'])
+    daily_traffic = traffic_rg.groupby(traffic_rg['MessungDatZeit'].dt.date)['AnzFahrzeuge'].sum()
+    traffic_rg['TotalDailyTraffic'] = traffic_rg['MessungDatZeit'].dt.date.map(daily_traffic)
+    traffic_rg['MessungDatZeit'] = pd.to_datetime(traffic_rg['MessungDatZeit'])
+    traffic_rg['Date'] = traffic_rg['MessungDatZeit'].dt.date
+    traffic_rg = traffic_rg.groupby('Date').first()['TotalDailyTraffic']
+    globals()[f'rg{year}_traffic'] = traffic_rg
