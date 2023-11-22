@@ -1,6 +1,6 @@
 # Data-Science-Fundamentals-Project
 
-Predicting NO2 Concentrations in Zurich
+Predicting Nitrogen Dioxide (NO2) Concentrations in Zurich
 
 Our project is centered around developing a predictive model to estimate daily NO2 concentrations along streets in Zurich. 
 
