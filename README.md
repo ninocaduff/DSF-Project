@@ -2,7 +2,7 @@
 
 Predicting NO2 Concentrations in Zurich
 
-Our project is centered around developing a predictive model to estimate daily NO2 concentrations along Rosengartenstrasse in Zurich. This bustling urban area, historically considered for the Rosengartentunnel project, presents a unique opportunity to analyze and predict air quality in response to varying traffic conditions and environmental factors.
+Our project is centered around developing a predictive model to estimate daily NO2 concentrations along streets in Zurich. 
 
 The primary goal is to create a regression-based machine learning model that can reliably forecast NO2 levels. By using daily NO2 concentration data as our target variable, we aim to establish a correlation with a range of independent variables from separate datasets, including traffic metrics, weather conditions, seasonal and daily variations, humidity, and concentrations of other air pollutants. This project seeks to demonstrate how such a model can be a vital tool for policymakers, offering insights into the potential air quality impacts of urban planning decisions.
 
