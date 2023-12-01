@@ -1,0 +1,71 @@
+# Load the tree location data file
+tree_locations_path = '/mnt/data/gsz.baumkataster_baumstandorte.csv'
+tree_locations_df = pd.read_csv(tree_locations_path)
+
+# Add the correct coordinates column
+tree_locations_df['coordinates'] = tree_locations_df['geometry'].apply(extract_coordinates)
+
+# Define the function to calculate distance between two points (Euclidean distance)
+def calculate_distance(coord1, coord2):
+    return ((coord1[0] - coord2[0]) ** 2 + (coord1[1] - coord2[1]) ** 2) ** 0.5
+
+# Define the target coordinates for each street
+target_coords = {
+    "Rosengartenstrasse": (2682095, 1249940),
+    "Schimmelstrasse": (2681950, 1247250),
+    "Stampfenbachstrasse": (2683140, 1249040)
+}
+
+# Initialize the dataframe to store the results
+tree_counts_df = pd.DataFrame(columns=['Straße', '1.5km', '1km', '500m', '200m'])
+
+# Calculate the number of trees within each radius for each street
+for street, coords in target_coords.items():
+    tree_counts = {
+        'Straße': street,
+        '1.5km': sum(calculate_distance(tree_coord, coords) <= 1500 for tree_coord in tree_locations_df['coordinates']),
+        '1km': sum(calculate_distance(tree_coord, coords) <= 1000 for tree_coord in tree_locations_df['coordinates']),
+        '500m': sum(calculate_distance(tree_coord, coords) <= 500 for tree_coord in tree_locations_df['coordinates']),
+        '200m': sum(calculate_distance(tree_coord, coords) <= 200 for tree_coord in tree_locations_df['coordinates'])
+    }
+    tree_counts_df = tree_counts_df.append(tree_counts, ignore_index=True)
+
+tree_counts_df
+
+
+# Load the green spaces data file
+green_spaces_path = '/mnt/data/gsz.gruenflaechen.csv'
+green_spaces_df = pd.read_csv(green_spaces_path)
+
+# Add the correct coordinates column
+green_spaces_df['coordinates'] = green_spaces_df['geometry'].apply(extract_coordinates)
+
+# Initialize the dataframe to store the results for green spaces
+green_space_counts_df = pd.DataFrame(columns=['Straße', '1.5km', '1km', '500m', '200m'])
+
+# Calculate the number of green spaces within each radius for each street
+for street, coords in target_coords.items():
+    green_space_counts = {
+        'Straße': street,
+        '1.5km': sum(calculate_distance(green_coord, coords) <= 1500 for green_coord in green_spaces_df['coordinates']),
+        '1km': sum(calculate_distance(green_coord, coords) <= 1000 for green_coord in green_spaces_df['coordinates']),
+        '500m': sum(calculate_distance(green_coord, coords) <= 500 for green_coord in green_spaces_df['coordinates']),
+        '200m': sum(calculate_distance(green_coord, coords) <= 200 for green_coord in green_spaces_df['coordinates'])
+    }
+    green_space_counts_df = green_space_counts_df.append(green_space_counts, ignore_index=True)
+
+green_space_counts_df
+
+
+# Since the user has uploaded another file, we need to check if this new file is related to the previous task.
+
+# Load the new CSV file to examine its contents
+new_file_path = '/mnt/data/taz.view_geoserver_tempo_ist_e.csv'
+new_df = pd.read_csv(new_file_path)
+
+# Display the first few rows of the new dataframe and the column names
+new_df_info = {
+    "columns": new_df.columns.tolist(),
+    "first_few_rows": new_df.head()
+}
+new_df_info
