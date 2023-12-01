@@ -1,3 +1,21 @@
+import re
+
+# Load the CSV file containing the tree data
+tree_data_path = '/mnt/data/merged_trees_and_geoserver_data.csv'
+trees_df = pd.read_csv(tree_data_path)
+
+# Define the function to extract coordinates from the 'geometry' column
+def extract_coordinates(point_str):
+    # Find all numbers in the string
+    numbers = re.findall(r"[-+]?\d*\.\d+|\d+", point_str)
+    # Convert strings to float and return as tuple
+    return tuple(map(float, numbers))
+
+# Apply the function to the 'geometry' column to create a new column with coordinate tuples
+trees_df['coordinates'] = trees_df['geometry'].apply(extract_coordinates)
+
+# Display the first few rows to confirm the coordinates column is correct
+trees_df[['geometry', 'coordinates']].head()
 # Load the tree location data file
 tree_locations_path = '/mnt/data/gsz.baumkataster_baumstandorte.csv'
 tree_locations_df = pd.read_csv(tree_locations_path)
