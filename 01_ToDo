@@ -2,9 +2,9 @@ To-Do List
 
 Preprocessing # Done till 2.12.2023 EOD
 
-1. Create csv with new column "NO2 Next Day" as a target variable.
-2. Add Features to csv (speed limits, trees, etc.) to make prediction better
-3. Maybe? -> Remove Seasonality from Data
+1. Create csv with new column "NO2 Next Day" as a target variable. --> DONE
+2. Add Features to csv (speed limits, trees, etc.) to make prediction better --> Jonah is preparing this, Frederick will merge it into the model
+3. Maybe? -> Remove Seasonality from Data --> Frederick has looked at this, he is confused, seems like there is seasonality, but idk what to do, there is also a slight donwards trend in the NO2 data, let's dicuss this
 
 Modelling # Done till 4.12.2023 EOD
 
