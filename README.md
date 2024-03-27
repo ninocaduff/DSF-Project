@@ -1,4 +1,4 @@
-# Data-Science-Fundamentals-Project
+# Data Science Fundamentals Project
 
 Predicting Nitrogen Dioxide (NO2) Concentrations in Zurich
 
