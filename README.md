@@ -17,7 +17,6 @@ We plan to utilize machine learning techniques such as Linear Regression, Lasso,
 The importance of this project is twofold:
 
 1.Public Health and Environmental Impact: Air quality is a significant concern, particularly in urban areas like Rosengartenstrasse. By accurately predicting NO2 levels, we can better understand and mitigate the health risks associated with air pollution.
-
 2. Policy and Urban Planning: The ability to forecast the impact of traffic and environmental changes on air quality is crucial for policymakers. This model could serve as a decision-making tool, especially in scenarios like the once-proposed Rosengartentunnel. It offers a way to simulate the effects of traffic redirection or infrastructure developments on NO2 concentrations. Decision-makers can leverage these insights to formulate strategies that minimize air pollution, aligning with environmental and public health goals.
 
 Beyond its immediate application in Zurich, this model could set a precedent for other cities facing similar challenges. It exemplifies how data-driven approaches can inform sustainable urban planning and environmental legislation. By integrating advanced analytics with policy development, we can pave the way for healthier, cleaner urban environments.
